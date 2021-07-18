@@ -1,15 +1,25 @@
+source_list:
+  - SB
+  - OL
+  - CP
+  - ADDR
+
+
+SB:
+  mysql_conf:
+    partition_column: App_Transaction_Id
+    query: "(select * from monks.TRANSACTIONSYNC) as t"
+
+
 s3_conf:
   s3_bucket: test-tushar-test
+  staging_location: staging
 
 sftp_conf:
     filetype: csv
     delimiter: |
     directory: /home/ubuntu/data
 
-mysql_conf:
-  dbtable: monks.TRANSACTIONSYNC
-  partition_column: App_Transaction_Id
-  query : "(select * from monks.TRANSACTIONSYNC where Internal_Member_Id = 'PC7135361') as t"
 
 mongodb_config:
   database: school
