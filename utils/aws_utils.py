@@ -48,7 +48,7 @@ def sftp_data_load(spark,file_path,app_secret):
             .option("host", app_secret["sftp_conf"]["hostname"]) \
             .option("port", app_secret["sftp_conf"]["port"]) \
             .option("username", app_secret["sftp_conf"]["username"]) \
-            .option("pem", os.path.abspath(current_dir + "/../../../../" + app_secret["sftp_conf"]["pem"])) \
+            .option("pem", os.path.abspath(current_dir + "/../" + app_secret["sftp_conf"]["pem"])) \
             .option("fileType", "csv") \
             .option("delimiter", "|") \
             .load(file_path)
