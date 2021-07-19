@@ -5,6 +5,12 @@ source_list:
   - ADDR
 
 
+OL:
+  sftp_conf:
+    filetype: csv
+    delimiter: |
+    directory: /home/ubuntu/worspace/data
+
 SB:
   mysql_conf:
     partition_column: App_Transaction_Id
@@ -15,11 +21,7 @@ s3_conf:
   s3_bucket: stagingmonks
   staging_location: staging
 
-OL:
-  sftp_conf:
-    filetype: csv
-    delimiter: |
-    directory: /home/ubuntu/worspace/data
+
 
 
 
