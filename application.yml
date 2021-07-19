@@ -12,7 +12,7 @@ SB:
 
 
 s3_conf:
-  s3_bucket: test-tushar-test
+  s3_bucket: stagingmonks
   staging_location: staging
 
 sftp_conf:

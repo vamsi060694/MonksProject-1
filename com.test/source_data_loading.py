@@ -31,13 +31,13 @@ if __name__ == '__main__':
     src_list = app_conf['source_list']
     for src in src_list:
         src_config = app_conf[src]
-        stg_path = 's3a://' + app_conf['s3_conf']['staging_location'] + src
+        stg_path = 's3a://' + app_conf['s3_conf']['s3_bucket'] + '/' + app_conf['s3_conf']['staging_location'] + '/' + src
         if src == 'SB':
             # use the ** operator/un-packer to treat a python dictionary as **kwargs
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
             mysql_transaction_df = ut.mysql_SB_data_load(spark,app_secret,src_config)
             mysql_transaction_df.show()
-            mysql_transaction_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
+            mysql_transaction_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path/SB)
 
     # SFTP source
         elif src == 'OL':
