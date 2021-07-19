@@ -35,21 +35,26 @@ if __name__ == '__main__':
         if src == 'SB':
             # use the ** operator/un-packer to treat a python dictionary as **kwargs
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
-            mysql_transaction_df = ut.mysql_SB_data_load(spark,app_conf,app_secret,src_config)
+            mysql_transaction_df = ut.mysql_SB_data_load(spark,app_secret,src_config)
             mysql_transaction_df.show()
             mysql_transaction_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
     # SFTP source
         elif src == 'OL':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
-            sftp_loyalty_df = ut.sftp_data_load(spark,app_conf,app_secret,src_config)
+            sftp_loyalty_df = ut.sftp_data_load(spark,
+                                                app_conf["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv",
+                                                app_secret)\
+                .withColumn('ins_dt', current_date())
             sftp_loyalty_df.show(5, False)
             sftp_loyalty_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
 
     #MongoDB Source
         elif src == 'CP':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
-            mongo_customer_df = ut.mongo_data_load(spark,app_conf,app_secret,src_config)
+            mongo_customer_df = ut.mongo_data_load(spark,app_conf["mongodb_config"]["database"],
+                                                   app_conf["mongodb_config"]["collection"]
+                                                   ,app_secret,src_config)
             mongo_customer_df.show(5,False)
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
 

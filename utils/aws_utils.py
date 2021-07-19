@@ -24,7 +24,7 @@ def get_mysql_jdbc_url(mysql_config: dict):
 
 
 #Source data loading functions:
-def mysql_SB_data_load(spark,app_conf,app_secret,src_config):
+def mysql_SB_data_load(spark,app_secret,src_config):
     jdbc_params = {"url": ut.get_mysql_jdbc_url(app_secret),
                    "lowerBound": "1",
                    "upperBound": "100",
@@ -42,7 +42,7 @@ def mysql_SB_data_load(spark,app_conf,app_secret,src_config):
         .withColumn('ins_dt', current_date())
     return txnDF
 
-def sftp_data_load(spark,app_conf,app_secret,src_config):
+def sftp_data_load(spark,file_path,app_secret):
         ol_txn_df = spark.read \
             .format("com.springml.spark.sftp") \
             .option("host", app_secret["sftp_conf"]["hostname"]) \
@@ -51,21 +51,20 @@ def sftp_data_load(spark,app_conf,app_secret,src_config):
             .option("pem", os.path.abspath(current_dir + "/../../../../" + app_secret["sftp_conf"]["pem"])) \
             .option("fileType", "csv") \
             .option("delimiter", "|") \
-            .load(app_conf["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv") \
-            .withColumn('ins_dt', current_date())
+            .load(file_path)
         return ol_txn_df
 
- def mongo_data_load(spark,app_conf,app_secret,src_config):
+ def mongo_data_load(spark,dbName,collName):
         customer_df = spark \
             .read \
             .format("com.mongodb.spark.sql.DefaultSource") \
-            .option("database", app_conf["mongodb_config"]["database"]) \
-            .option("collection", app_conf["mongodb_config"]["collection"]) \
+            .option("database", dbName) \
+            .option("collection",collName ) \
             .load() \
             .withColumn('ins_dt', current_date())
         return customer_df
 
-def s3_data_load(spark,app_conf,app_secret,src_config):
+def s3_data_load(spark):
         campaign_df = spark \
                 .read \
                 .csv("s3://monksworkspace/data/KC_Extract_1_20171009.csv") \
