@@ -54,7 +54,7 @@ def sftp_data_load(spark,file_path,app_secret):
             .load(file_path)
         return ol_txn_df
 
- def mongo_data_load(spark,dbName,collName):
+def mongo_data_load(spark,dbName,collName):
         customer_df = spark \
             .read \
             .format("com.mongodb.spark.sql.DefaultSource") \
