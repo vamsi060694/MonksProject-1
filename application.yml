@@ -15,10 +15,12 @@ s3_conf:
   s3_bucket: stagingmonks
   staging_location: staging
 
-sftp_conf:
+OL:
+  sftp_conf:
     filetype: csv
     delimiter: |
-    directory: /home/ubuntu/data
+    directory: /home/ubuntu/worspace/data
+
 
 
 mongodb_config:

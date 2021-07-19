@@ -47,7 +47,7 @@ if __name__ == '__main__':
                                                 app_secret)\
                 .withColumn('ins_dt', current_date())
             sftp_loyalty_df.show(5, False)
-            sftp_loyalty_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
+            sftp_loyalty_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
     #MongoDB Source
         elif src == 'CP':
