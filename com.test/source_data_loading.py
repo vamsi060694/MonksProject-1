@@ -37,7 +37,7 @@ if __name__ == '__main__':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
             mysql_transaction_df = ut.mysql_SB_data_load(spark,app_secret,src_config)
             mysql_transaction_df.show()
-            mysql_transaction_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path/SB)
+            mysql_transaction_df.write.partitionBy('ins_dt').mode('overwrite').parquet(stg_path)
 
     # SFTP source
         elif src == 'OL':
