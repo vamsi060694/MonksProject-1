@@ -8,7 +8,7 @@ source_list:
 SB:
   mysql_conf:
     partition_column: App_Transaction_Id
-    query: "(select * from testdb.TRANSACTIONSSYNC) as t"
+    query: "(select * from testdb.transactionssync) as t"
 
 
   sftp_conf:
