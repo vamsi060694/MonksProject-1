@@ -1,3 +1,5 @@
+
+
 from pyspark.sql import SparkSession
 import yaml
 import os.path
@@ -43,7 +45,7 @@ if __name__ == '__main__':
         elif src == 'OL':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
             sftp_loyalty_df = ut.sftp_data_load(spark,
-                                                app_conf["OL"]["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv",
+                                                app_conf["sftp_conf"]["directory"] + "/receipts_delta_GBR_14_10_2017.csv",
                                                 app_secret)\
                 .withColumn('ins_dt', current_date())
             sftp_loyalty_df.show(5, False)
@@ -54,7 +56,7 @@ if __name__ == '__main__':
             print("\nReading data from MySQL DB using SparkSession.read.format(),")
             mongo_customer_df = ut.mongo_data_load(spark,app_conf["mongodb_config"]["database"],
                                                    app_conf["mongodb_config"]["collection"]
-                                                   ,app_secret,src_config)
+                                                    ,app_secret,src_config)
             mongo_customer_df.show(5,False)
             mongo_customer_df.write.partitionBy('ins_dt').mode('overwrite').parquet()
 
