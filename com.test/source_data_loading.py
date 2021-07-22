@@ -69,4 +69,4 @@ if __name__ == '__main__':
 
 
 
-# spark-submit --packages "mysql:mysql-connector-java:8.0.15" /home/hadoop/MonksProject-1/com.test/source_data_loading.py/mysql_transaction_df
+# spark-submit --packages "mysql:mysql-connector-java:8.0.15" /home/hadoop/MonksProject-1/com.test/source_data_loading.py
