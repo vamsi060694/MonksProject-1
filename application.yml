@@ -11,6 +11,7 @@ SB:
     query: "(select * from testdb.transactionssync) as t"
 
 
+OL:
   sftp_conf:
     filetype: csv
     delimiter: |
