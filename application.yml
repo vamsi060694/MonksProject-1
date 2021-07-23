@@ -19,7 +19,7 @@ SB:
 
 
 s3_conf:
-  s3_bucket: stagingmonks
+  s3_bucket: vamsibucket94
   staging_location: staging
 
 mongodb_config:
