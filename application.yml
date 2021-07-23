@@ -14,7 +14,7 @@ SB:
   sftp_conf:
     filetype: csv
     delimiter: |
-    directory: /home/ubuntu/worspace/data
+    directory: /home/ubuntu/data
 
 
 
