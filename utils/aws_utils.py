@@ -30,7 +30,7 @@ def mysql_SB_data_load(spark,app_secret,src_config):
                    "upperBound": "100",
                    "dbtable": src_config["mysql_conf"]["query"],
                    "numPartitions": "2",
-                   "partitionColumn": part_col,
+                   "partitionColumn": src_config["mysql_conf"]["partition_column"],
                    "user": app_secret["mysql_conf"]["username"],
                    "password": app_secret["mysql_conf"]["password"]
                    }
