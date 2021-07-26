@@ -3,6 +3,8 @@ import os.path
 import utils.aws_utils as ut
 from pyspark.sql.functions import *
 
+current_dir = os.path.abspath(os.path.dirname(__file__))
+
 
 
 def get_redshift_jdbc_url(redshift_config: dict):
