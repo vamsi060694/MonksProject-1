@@ -12,9 +12,8 @@ OL:
 
 SB:
   mysql_conf:
-    dbtable: testdb.transactionssync
     partition_column: App_Transaction_Id
-
+    query: "(select * from testdb.transactionssync) as t"
 
 s3_conf:
   s3_bucket: vamsibucket94
