@@ -24,13 +24,13 @@ def get_mysql_jdbc_url(mysql_config: dict):
 
 
 #Source data loading functions:
-def mysql_SB_data_load(spark,app_secret,src_config):
+def mysql_SB_data_load(spark,app_secret,table_name,part_col):
     jdbc_params = {"url": ut.get_mysql_jdbc_url(app_secret),
                    "lowerBound": "1",
                    "upperBound": "100",
-                   "dbtable": src_config["mysql_conf"]["query"],
+                   "dbtable": table_name,
                    "numPartitions": "2",
-                   "partitionColumn": src_config["mysql_conf"]["partition_column"],
+                   "partitionColumn": part_col,
                    "user": app_secret["mysql_conf"]["username"],
                    "password": app_secret["mysql_conf"]["password"]
                    }

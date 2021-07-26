@@ -12,24 +12,22 @@ OL:
 
 SB:
   mysql_conf:
+    dbtable: testdb.transactionssync
     partition_column: App_Transaction_Id
-    query: "(select * from testdb.transactionssync) as t"
-
-
 
 
 s3_conf:
   s3_bucket: vamsibucket94
   staging_location: staging
-
-mongodb_config:
-  database: school
-  collection: students
-
-redshift_conf:
-  filetype: csv
-  delimiter: |
-  dbtable: PUBLIC.TXN_FCT
-  query: SELECT txn_id, create_time, amount, cust_id from PUBLIC.TXN_FCT
+ADDR:
+  mongodb_config:
+    database: school
+    collection: students
+CP:
+  redshift_conf:
+    filetype: csv
+    delimiter: |
+    dbtable: PUBLIC.TXN_FCT
+    query: SELECT txn_id, create_time, amount, cust_id from PUBLIC.TXN_FCT
 
 
